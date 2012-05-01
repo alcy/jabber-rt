@@ -25,11 +25,11 @@ my $rt = RT::Client::REST->new(
 my $disco   = AnyEvent::XMPP::Ext::Disco->new;
 my $muc     = AnyEvent::XMPP::Ext::MUC->new (disco => $disco);
 
-my $sysrt_user;
-my $sysrt_pass;
-my $sysrt = sub { 
+my $rt_user;
+my $rt_pass;
+my $rt_ticket = sub { 
   my $id = shift;
-  $rt->login(username => $sysrt_user, password => $sysrt_pass);
+  $rt->login(username => $rt_user, password => $rt_pass);
   my $ticket = $rt->show(type => 'ticket', id => "$id");
   return $ticket;
 };
@@ -91,7 +91,7 @@ $client->reg_cb(
         return if $is_echo;
         return if $msg->is_delayed;
         my $id = $parsemsg->($msg);
-        my $ticket = $sysrt->($id);
+        my $ticket = $rt_ticket->($id);
         $mainreply->($msg, $ticket); 
       },
     );
