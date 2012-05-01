@@ -1,0 +1,4 @@
+Jabber/xmpp & Request Tracker integration. 
+Built on AnyEvent::XMPP, RT::Client::REST
+Additional dependencies: DateTimeX::Easy
+
