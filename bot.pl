@@ -72,7 +72,7 @@ my $parsemsg = sub {
 
 my $jabber_user; # user@domain
 my $jabber_pass;
-my $jabber_room; # test@conference.localhost
+my @jabber_rooms; # test@conference.localhost
 my $jabber_room_nick; # desired nick in the room
 
 $client->add_extension($disco);
@@ -82,7 +82,9 @@ $client->add_account($jabber_user, $jabber_pass);
 $client->reg_cb( 
   session_ready => sub { 
     my ( $cl, $acc ) = @_;
-    $muc->join_room($acc->connection, $jabber_room, $jabber_room_nick, { history => { chars => 0 } });
+    for my $room ( @jabber_rooms ) { 
+      $muc->join_room($acc->connection, $room, $jabber_room_nick, { history => { chars => 0 } });
+    }
     $muc->reg_cb(
       message => sub { 
         my ( $cl, $acc, $msg, $is_echo ) =  @_;
