@@ -1,3 +1,5 @@
+Note : If you are interested in a more generic pluggable bot, check out https://github.com/alcy/OpsBot
+
 Jabber/xmpp & Request Tracker integration. 
 Built on AnyEvent::XMPP, RT::Client::REST
 Additional dependencies: DateTimeX::Easy
